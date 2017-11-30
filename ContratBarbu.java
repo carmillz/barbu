@@ -9,8 +9,14 @@ package barbu;
  *
  * @author Salmé
  */
-public class ContratBarbu {
+public class ContratBarbu implements Contrat{
     
+    public boolean fin(Jeu jeu){
+        if (jeu.plateau.contains(new Carte("Coeur",14))){
+            return true;
+        }
+        return false;
+    }
     
 
 }
