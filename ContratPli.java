@@ -9,12 +9,13 @@ package barbu;
  *
  * @author Salmé
  */
-public class ContratPli {
-    
-    
-    
-    public finManchePli(){
-        while (int nbCartes>0){
-            //le jeu continue
+
+public class ContratPli implements Contrat {
+
+    public boolean fin(Jeu jeu) {
+        if (jeu.nbcartes==0){
+            return true;
+        }
+        return false;
     }
 }
