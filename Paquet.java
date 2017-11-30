@@ -63,11 +63,16 @@ public class Paquet {
 	 * nombre de cartes égaux
 	 * Au niveau de l'exection...
 	 */
-	public HashSet <Carte> carteAJouer(int nbJoueurs) {
+	public HashSet <Carte> cartesAJouer(int nbJoueurs) {
     	if (nbCartes%nbJoueurs!=0) {
-        	if (nbCartes==32) {
-           	 
-        	}
+            if (nbCartes==32) {
+           	 paquet.remove(new Carte("Pique",7));
+                 paquet.remove(new Carte("Trèfle",7));   
+            }
+            else {
+                paquet.remove(new Carte("Pique",2));
+                paquet.remove(new Carte("Trèfle",2));
+            }
     	}
     	return  paquet;
 	}
@@ -78,10 +83,3 @@ public class Paquet {
     	return ("Paquet [" +paquet + "]");
 	}
 }
-
-
-
-
-
-
-
