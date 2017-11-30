@@ -58,19 +58,17 @@ public class Joueur {
    	 return nom;
     }
     
-        public void choisirCarte(Jeu jeu){
-            for (int i=1; i<=main.size(); i++){
-                System.out.println(i + " : " + main.get(i-1).toString());
-            }            
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Choisissez votre carte ! Entrez  le numéro de la carte.");
-            int numero = sc.nextInt();
-            sc.close();
-            jeu.plateau.add(main.get(numero-1));
-            main.remove(numero-1);
-        }
+    public void choisirCarte(Jeu jeu){
+        for (int i=1; i<=main.size(); i++){
+            System.out.println(i + " : " + main.get(i-1).toString());
+        }            
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Choisissez votre carte ! Entrez  le numéro de la carte.");
+        int numero = sc.nextInt();
+        sc.close();
+        jeu.plateau.add(main.get(numero-1));
+        main.remove(numero-1);
+    }
     
 }
-
-
 
