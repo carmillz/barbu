@@ -9,7 +9,7 @@ public interface Contrat {
 
 	public abstract boolean fin(Jeu jeu, int nombre);
 	
-	
+	//test jb
 	
 
 }
