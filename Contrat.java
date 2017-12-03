@@ -1,16 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package barbu;
 
-/**
- *
- * @author Salmé
- */
 public interface Contrat {
-    
-    public abstract boolean fin(Jeu jeu);
+
+	public abstract boolean fin(Jeu jeu);
+
+	public abstract int comptePoints(Joueur joueur);
+
+	public abstract boolean fin(Jeu jeu, int nombre);
 
 }
