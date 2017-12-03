@@ -39,7 +39,6 @@ public class Jeu {
 		System.out.println(joueurs.toString());
 	}
 
-
 	/*
 	 * Méthode qui permet d'ajouter au joueur gangnant le pli en cours
 	 * Une fois les quatre cartes "posées" sur le plateau, on les
