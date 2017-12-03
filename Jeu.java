@@ -13,7 +13,7 @@ public class Jeu {
 	// CONSTRUCTEUR
 	public Jeu(int nombre) {
 		super();
-		
+
 		this.joueurs = new ArrayList<Joueur>();
 		this.plateau = new ArrayList<Carte>();
 		this.nbcartesencours = nombre;
@@ -39,18 +39,25 @@ public class Jeu {
 		System.out.println(joueurs.toString());
 	}
 
-	public void gagnant() { // détermine le gagnant d'un pli
+
+	/*
+	 * Méthode qui permet d'ajouter au joueur gangnant le pli en cours
+	 * Une fois les quatre cartes "posées" sur le plateau, on les
+	 * compare avec les autres via une boucle qui permettra de rendre
+	 * la carte la "plus forte" sachant que cette dernière doit
+	 * possèder le même symboel que la première carte jouée.
+	 * Une fois que cette carte est trouvée, on l'ajoute à l'attribut
+	 * qui conserve les plis du joueur gagnant
+	 */
+	public void gagnant() {
 		String symbole = plateau.get(0).getSymbole();
 		int valeur = plateau.get(0).getValeur();
 		int max = 0;
-		for (int i = 1; i < 4; i++) { // on va comparer les 3 autres cartes avec la premiere qui a été posée
-			if (plateau.get(i).getSymbole() == symbole && plateau.get(i).getValeur() > valeur) {
-				max = i; // si la carte au rang i est de la meme valeur mais est plus grande, alors
-							// l'indice de cette
-				// carte devient le nouveau max
+		for (int i = 1; i < 4; i++) {
+			if (plateau.get(i).getSymbole().equals(symbole) && plateau.get(i).getValeur() > valeur) {
+				max = i;
 			}
 		}
-		// la personne ayant joué la carte récupère le pli
 		joueurs.get(max).setPlis(new HashSet<Carte>(plateau));
 	}
 
@@ -139,6 +146,9 @@ public class Jeu {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Voulez-vous jouer avec 32 ou 52 cartes ?"); // demande le nombre de cartes
+
+
+
 		int nbcartes = sc.nextInt();
 		Paquet paquet = new Paquet(nbcartes);
 		Jeu jeu = new Jeu(nbcartes); // initialise le jeu
