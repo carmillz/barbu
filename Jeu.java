@@ -13,6 +13,7 @@ public class Jeu {
 	// CONSTRUCTEUR
 	public Jeu(int nombre) {
 		super();
+		
 		this.joueurs = new ArrayList<Joueur>();
 		this.plateau = new ArrayList<Carte>();
 		this.nbcartesencours = nombre;
