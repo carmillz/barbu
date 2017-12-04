@@ -8,14 +8,14 @@ public class ContratBarbu implements Contrat {
 	}
 	
 	public boolean fin(Jeu jeu) {
-		if (jeu.plateau.contains(new Carte("Coeur", 14))) {
+		if (jeu.plateau.contains(new Carte("Coeur", 13))) {
 			return true;
 		}
 		return false;
 	}
 
 	public int comptePoints(Joueur joueur) {
-		if (joueur.getPlis().contains(new Carte("Coeur", 14))) {
+		if (joueur.getPlis().contains(new Carte("Coeur", 13))) {
 			return (-60);
 		}
 		return 0;
