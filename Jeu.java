@@ -37,19 +37,25 @@ public class Jeu {
 		joueurs.remove(0);
 		System.out.println(joueurs.toString());
 	}
-
-	public void gagnant() { // détermine le gagnant d'un pli
+	
+	/*
+	 * Méthode qui permet d'ajouter au joueur gangnant le pli en cours
+	 * Une fois les quatre cartes "posées" sur le plateau, on les 
+	 * compare avec les autres via une boucle qui permettra de rendre
+	 * la carte la "plus forte" sachant que cette dernière doit
+	 * possèder le même symboel que la première carte jouée.
+	 * Une fois que cette carte est trouvée, on l'ajoute à l'attribut 
+	 * qui conserve les plis du joueur gagnant
+	 */
+	public void gagnant() { 
 		String symbole = plateau.get(0).getSymbole();
 		int valeur = plateau.get(0).getValeur();
 		int max = 0;
-		for (int i = 1; i < 4; i++) { // on va comparer les 3 autres cartes avec la premiere qui a été posée
-			if (plateau.get(i).getSymbole() == symbole && plateau.get(i).getValeur() > valeur) {
-				max = i; // si la carte au rang i est de la meme valeur mais est plus grande, alors
-							// l'indice de cette
-				// carte devient le nouveau max
+		for (int i = 1; i < 4; i++) { 
+			if (plateau.get(i).getSymbole().equals(symbole) && plateau.get(i).getValeur() > valeur) {
+				max = i; 
 			}
 		}
-		// la personne ayant joué la carte récupère le pli
 		joueurs.get(max).setPlis(new HashSet<Carte>(plateau));
 	}
 
@@ -69,7 +75,7 @@ public class Jeu {
 					}
 				}
 				nbcartesencours = nbcartesencours - 4;
-				finManche = (this.choixContrat().fin(this) || this.choixContrat().fin(this, nbcartesencours));
+				finManche = (this.choixContrat().fin(this,0) || this.choixContrat().fin(this, nbcartesencours));
 
 				/*
 				 * on change la valeur de finManche si : les joueurs n'ont plus de cartes
@@ -79,38 +85,34 @@ public class Jeu {
 			}
 		}
 	}
-
-	public void creationJoueurs() {
-		System.out.println("--- Début saisie des joueurs ---");
-		String creation = "true";
+	
+	
+	public void creationJoueurs() throws Exception{
+		boolean creation = true;
 		Scanner sc = new Scanner(System.in);
 		int i = 1;
-		while (creation.equals("true")) {
-			System.out.println("Saisie joueur " + i);
-			System.out.println("Entrez le nom du joueur");
+		while (creation) {
+			System.out.println("Entrez le nom du joueur ou faites entrer s'il n'y en a plus");
 			String nom = sc.nextLine();
-			joueurs.add(new Joueur(nom, String.valueOf(i)));
-			System.out.println("Nouveau joueur ? (true/false)");
-			creation = sc.nextLine();
-			while (!creation.equals("true") && !creation.equals("false")) {
-				System.out.println("Erreur de saisie, recommencez.");
-				System.out.println("Nouveau joueur ? (true/false)");
-				creation = sc.nextLine();
+			if (nom.equals("")){
+				creation=false;
+			}else {
+				joueurs.add(new Joueur(nom,String.valueOf(i)));
 			}
 			i++;
 		}
-		System.out.println("--- Fin saisie des joueurs ---");
+		if (joueurs.size()<=1){
+			throw new Exception("Vous ne pouvez pas jouer tout seul !");
+		}
 		sc.close();
 	}
 
 	// Méthode qui demande à l'utilisateur le contrat qu'il veut
 	public Contrat choixContrat() {
-		String choix = "1234567";
-		String reponse ="";
-
-		while (!choix.contains(reponse) || reponse.length()!=1) {
-			
-			System.out.println("--- Choix du contrat ---");
+		boolean quitter = false;
+		
+		while (!quitter) {
+			System.out.println("Choississez votre contrat !");
 			System.out.println("1 : Les plis");
 			System.out.println("2 : Les dames");
 			System.out.println("3 : Les coeurs");
@@ -119,44 +121,47 @@ public class Jeu {
 			System.out.println("6 : La Salade");
 			System.out.println("7 : Quitter");
 			Scanner sc = new Scanner(System.in);
-			reponse = sc.nextLine();
-
-			switch (choix) {
-			case "1":
-				return new ContratPli(this);
-			case "2":
-				return new ContratDame(this);
-			case "3":
-				return new ContratCoeurs(this);
-			case "4":
-				return new ContratBarbu(this);
-			case "5":
-				return new ContratReussite(this);
-			case "6":
-				return new ContratSalade(this);
-			case "7":
-				break;
-			default:
-				System.out.println("Recommencez");
-				reponse ="";
-				break;
+			String tmp;
+			if ((tmp=sc.nextLine())!=null){
+				int choix = Integer.valueOf(tmp);
+				switch (choix) {
+					case 1:
+						return new ContratPli(this);
+					case 2:
+						return new ContratDame(this);
+					case 3:
+						return new ContratCoeurs(this);
+					case 4:
+						return new ContratBarbu(this);
+					case 5:
+						return new ContratReussite(this);
+					case 6:
+						return new ContratSalade(this);
+					case 7:
+						quitter=true;
+						break;
+					default:
+						System.out.println("Option inexistante, recommencez");
+						break;
+					}
+				sc.close();
+				}
 			}
-		}
+			
+		
 		return null; // DEMANDER A CASSANDRE
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Voulez-vous jouer avec 32 ou 52 cartes ?"); // demande le nombre de cartes
 		int nbcartes = sc.nextInt();
-		//Paquet paquet = new Paquet(nbcartes);
+		Paquet paquet = new Paquet(nbcartes);
 		Jeu jeu = new Jeu(nbcartes); // initialise le jeu
-		//jeu.creationJoueurs(); // initialise les joueurs
-		//paquet.cartesAJouer(jeu.joueurs.size()); // adapte le nombre de cartes en fonction du nombre de joueurs
-		//System.out.println("taille " + paquet.paquet.size());
-		//paquet.distribuer(jeu.joueurs); // distribue les cartes entre les joueurs
-		//System.out.println(paquet.paquet.size());
-		//jeu.rotation();
+		jeu.creationJoueurs(); // initialise les joueurs
+		paquet.cartesAJouer(jeu.joueurs.size()); // adapte le nombre de cartes en fonction du nombre de joueus
+		paquet.distribuer(jeu.joueurs); // distribue les cartes entre les joueurs
+		jeu.rotation();
 		jeu.choixContrat();
 
 		sc.close();

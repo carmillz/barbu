@@ -45,7 +45,6 @@ public class Paquet {
 	 * joueur puis on la supprime du paquet. On passe ensuite au joueur suivant
 	 * jusqu'à ce qu'il n'y aie plus de cartes.
 	 */
-	
 	public void distribuer(ArrayList<Joueur> joueurs) {
 		Carte c;
 		while (paquet.size() != 0) {
@@ -55,7 +54,7 @@ public class Paquet {
 				joueurs.get(i).getMain().add(c);
 			}
 		}
-}
+	}
 
 	/*
 	 * Méthode qui permet de donner le nombre de cartes mises en jeu en fonction du

@@ -6,16 +6,10 @@ public class ContratBarbu implements Contrat {
 	public ContratBarbu(Jeu jeu) {
 		jeu.partie(jeu.joueurs);
 	}
-	
-	public boolean fin(Jeu jeu) {
-		if (jeu.plateau.contains(new Carte("Coeur", 13))) {
-			return true;
-		}
-		return false;
-	}
+
 
 	public int comptePoints(Joueur joueur) {
-		if (joueur.getPlis().contains(new Carte("Coeur", 13))) {
+		if (joueur.getPlis().contains(new Carte("Coeur", 14))) {
 			return (-60);
 		}
 		return 0;
@@ -24,7 +18,9 @@ public class ContratBarbu implements Contrat {
 
 	@Override
 	public boolean fin(Jeu jeu, int nombre) {
-		// TODO Auto-generated method stub
+		if (jeu.plateau.contains(new Carte("Coeur", 14))) {
+			return true;
+		}
 		return false;
 	}
 

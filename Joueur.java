@@ -115,7 +115,7 @@ public class Joueur implements Comparable<Carte> {
 		}
 		
 		//DEMANDER A CASSANDRE POUR TRIER LES CARTES
-		carreau.sort();
+		//carreau.sort();
 
 	}
 
@@ -123,4 +123,10 @@ public class Joueur implements Comparable<Carte> {
 		return (this.main.get(0).compareTo(c));
 	}
 	//FIN MÉTHODES
+
+	@Override
+	public int compareTo(Carte arg0) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
