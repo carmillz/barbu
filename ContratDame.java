@@ -6,7 +6,7 @@ public class ContratDame implements Contrat {
 	public ContratDame(Jeu jeu) {
 		jeu.partie(jeu.joueurs);
 	}
-	public boolean fin(Jeu jeu) {
+	public boolean fin(Jeu jeu, int nombre) {
 		if (jeu.nbdames == 4) {
 			return true;
 		}
@@ -27,11 +27,6 @@ public class ContratDame implements Contrat {
 		
 	}
 
-//Methode non utilisée
 
-	@Override
-	public boolean fin(Jeu jeu, int nombre) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 }

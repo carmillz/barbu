@@ -16,11 +16,5 @@ public class ContratPli implements Contrat {
 	public int comptePoints (Joueur joueur) {
 		return (joueur.getPlis().size()/joueur.getNbplis());
 	}
-
-//non utilisé	
-	@Override
-	public boolean fin(Jeu jeu, int nombre) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+7
 }
