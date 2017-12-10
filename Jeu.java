@@ -159,12 +159,13 @@ public class Jeu {
 		Paquet paquet = new Paquet(nbcartes);
 		Jeu jeu = new Jeu(nbcartes); // initialise le jeu
 		jeu.creationJoueurs(); // initialise les joueurs
-		paquet.cartesAJouer(jeu.joueurs.size()); // adapte le nombre de cartes en fonction du nombre de joueus
+		paquet.cartesAJouer(jeu.joueurs.size()); // adapte le nombre de cartes en fonction du nombre de joueurs
 		paquet.distribuer(jeu.joueurs); // distribue les cartes entre les joueurs
 		jeu.rotation();
 		jeu.choixContrat();
 
-		sc.close();
+		jeu.joueurs.get(0).choisirCarte(jeu);
+		//sc.close();
 		/*
 		 * for (int i=0; i<jeu.joueurs.get(0).getMain().size(); i++){
 		 * System.out.println(i + " : " +
