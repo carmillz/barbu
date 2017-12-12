@@ -81,15 +81,46 @@ public class Joueur implements Comparable<Carte> {
 	}
 
 	public void choisirCarte(Jeu jeu) {
+		boolean possible=false;
+		System.out.println("Vos cartes sont :");
+		if (jeu.plateau.isEmpty()){
+			possible=true;
+		}
 		for (int i = 1; i <= main.size(); i++) {
 			System.out.println(i + " : " + main.get(i - 1).toString());
+			if (!jeu.plateau.isEmpty() && jeu.plateau.get(0).getSymbole().equals(main.get(i-1).getSymbole())){
+				possible=true;
+			}
 		}
-		System.out.println("Choisissez votre carte ! Entrez  le numéro de la carte.");
-		Scanner scan = new Scanner(System.in);
-		int numero = scan.nextInt();
-		jeu.plateau.add(main.get(numero - 1));
-		main.remove(numero - 1);
-		//scan.close();
+		boolean pasJoue=true;
+		while (pasJoue){
+			if (possible){
+				System.out.println("Choisissez votre carte ! Entrez  le numéro de la carte.");
+				Scanner scan = new Scanner(System.in);
+				int numero = scan.nextInt();
+				if (numero-1>=main.size()){
+					System.out.println("Cette carte n'existe pas... Réessayez !");
+				}else if (jeu.plateau.size()==0 || jeu.plateau.get(0).getSymbole().equals(main.get(numero-1).getSymbole())){
+					jeu.plateau.add(main.get(numero-1));
+					pasJoue=false;
+					main.remove(numero-1);
+				}else {
+					System.out.println(" Vous ne pouvez pas jouer cette carte !");
+				}
+			}else {
+				System.out.println("Vous ne pouvez pas jouer la couleur demandée, jouez n'importe quelle carte !");
+				Scanner scan = new Scanner(System.in);
+				int numero = scan.nextInt();
+				if (numero-1>=main.size()){
+					System.out.println("Cette carte n'existe pas... Réessayez !");
+				}else {
+					jeu.plateau.add(main.get(numero-1));
+					main.remove(numero-1);
+					pasJoue=false;
+				}
+			}
+		}
+		
 	}
 
 	public void trierMain() {

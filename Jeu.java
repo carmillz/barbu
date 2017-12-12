@@ -11,12 +11,12 @@ public class Jeu {
 	int nbcoeurs; // utilie pour le contrat coeur
 
 	// CONSTRUCTEUR
-	public Jeu(int nombre) {
+	public Jeu(int nbcartes) {
 		super();
 		this.joueurs = new ArrayList<Joueur>();
 		this.plateau = new ArrayList<Carte>();
-		this.nbcartesencours = nombre;
-		this.nbcartes = 0;
+		this.nbcartesencours = nbcartes;
+		this.nbcartes = nbcartes;
 		this.nbcoeurs = 0;
 		this.nbdames = 0;
 	}
@@ -51,39 +51,56 @@ public class Jeu {
 		String symbole = plateau.get(0).getSymbole();
 		int valeur = plateau.get(0).getValeur();
 		int max = 0;
-		for (int i = 1; i < 4; i++) { 
+		for (int i = 1; i < joueurs.size(); i++) { 
 			if (plateau.get(i).getSymbole().equals(symbole) && plateau.get(i).getValeur() > valeur) {
+				valeur = plateau.get(i).getValeur();
 				max = i; 
 			}
 		}
+		System.out.println("Le gagnant de ce pli est " + joueurs.get(max).getNom());
 		joueurs.get(max).setPlis(new HashSet<Carte>(plateau));
 	}
 
 	/*
 	 * Exécution d'une partie
 	 */
-	public void partie(ArrayList<Joueur> joueurs) {
+	
+	public void partie(Contrat contrat){
 		boolean finPartie = false;
 		while (!finPartie) {
-			boolean finManche = false;
-			while (!finManche) {
-				for (int j = 0; j < 4; j++) {
-					for (int i = 0; i < joueurs.size(); i++) {
-						joueurs.get(i).choisirCarte(this);
-						j++;
-						this.gagnant();
-					}
-				}
-				nbcartesencours = nbcartesencours - 4;
-				finManche = (this.choixContrat().fin(this,0) || this.choixContrat().fin(this, nbcartesencours));
-
-				/*
-				 * on change la valeur de finManche si : les joueurs n'ont plus de cartes
-				 * suivant les contrats
-				 *
-				 */
+			int cartesJouees = 0;
+			while (cartesJouees<nbcartes) {
+				cartesJouees += manche();
+				contrat.comptePoints(joueurs);
 			}
 		}
+	}
+	
+	
+	public int manche(){
+		int cartesJouees=0;
+		for (int i=1; i < nbcartes/joueurs.size(); i++){
+			cartesJouees = this.tour();
+			gagnant();
+			plateau=new ArrayList<Carte>();
+		}
+		return cartesJouees;
+	}
+	
+	public int tour(){
+		for (int j=0; j<joueurs.size(); j++){
+			System.out.println("C'est au tour de " + joueurs.get(j).getNom() + " de jouer ");
+			System.out.println(" Les cartes déjà jouées sont : ");
+			for (int k=0; k<this.plateau.size(); k++){
+				System.out.println(plateau.get(k) + " jouée par " + joueurs.get(k).getNom());
+			}
+			joueurs.get(j).choisirCarte(this);
+		}
+		System.out.println(" Les cartes jouées lors de ce tour sont : ");
+		for (int k=0; k<this.plateau.size(); k++){
+			System.out.println(plateau.get(k) + " jouée par " + joueurs.get(k).getNom());
+		}
+		return plateau.size();
 	}
 	
 	
@@ -104,13 +121,14 @@ public class Jeu {
 		if (joueurs.size()<=1){
 			throw new Exception("Vous ne pouvez pas jouer tout seul !");
 		}
-		sc.close();
+		//sc.close();
 	}
 
 	// Méthode qui demande à l'utilisateur le contrat qu'il veut
 	public Contrat choixContrat() {
 		boolean quitter = false;
-		
+		int tmp;
+		Scanner sc = new Scanner(System.in);
 		while (!quitter) {
 			System.out.println("Choississez votre contrat !");
 			System.out.println("1 : Les plis");
@@ -119,10 +137,9 @@ public class Jeu {
 			System.out.println("4 : Le barbu (ou le roi de Coeur)");
 			System.out.println("5 : La Réussite");
 			System.out.println("6 : La Salade");
-			System.out.println("7 : Quitter");
-			Scanner sc = new Scanner(System.in);
-			String tmp;
-			if ((tmp=sc.nextLine())!=null){
+			System.out.println("0 : Quitter");
+			tmp = sc.nextInt();
+			if (!quitter){
 				int choix = Integer.valueOf(tmp);
 				switch (choix) {
 					case 1:
@@ -137,18 +154,16 @@ public class Jeu {
 						return new ContratReussite(this);
 					case 6:
 						return new ContratSalade(this);
-					case 7:
+					case 0:
 						quitter=true;
 						break;
 					default:
 						System.out.println("Option inexistante, recommencez");
 						break;
 					}
-				sc.close();
+				//sc.close();
 				}
 			}
-			
-		
 		return null; // DEMANDER A CASSANDRE
 	}
 
@@ -159,12 +174,12 @@ public class Jeu {
 		Paquet paquet = new Paquet(nbcartes);
 		Jeu jeu = new Jeu(nbcartes); // initialise le jeu
 		jeu.creationJoueurs(); // initialise les joueurs
-		paquet.cartesAJouer(jeu.joueurs.size()); // adapte le nombre de cartes en fonction du nombre de joueurs
+		paquet.cartesAJouer(jeu.joueurs.size()); // adapte le nombre de cartes en fonction du nombre de joueus
 		paquet.distribuer(jeu.joueurs); // distribue les cartes entre les joueurs
 		jeu.rotation();
-		jeu.choixContrat();
+		System.out.println(jeu.nbcartes);
+		jeu.partie(jeu.choixContrat());
 
-		jeu.joueurs.get(0).choisirCarte(jeu);
 		//sc.close();
 		/*
 		 * for (int i=0; i<jeu.joueurs.get(0).getMain().size(); i++){
