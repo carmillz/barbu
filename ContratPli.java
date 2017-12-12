@@ -4,17 +4,22 @@ package barbu;
 public class ContratPli implements Contrat {
 
 	public ContratPli(Jeu jeu) {
-		jeu.partie(jeu.joueurs);
+		jeu.partie(new ContratPli());
 	}
-	public boolean fin(Jeu jeu) {
+	
+	public ContratPli(){
+		
+	}
+	public int comptePoints (Joueur joueur) {
+		return (joueur.getPlis().size()/joueur.getNbplis());
+	}
+
+	@Override
+	public boolean fin(Jeu jeu, int nombre) {
 		if (jeu.nbcartesencours == 0) {
 			return true;
 		}
 		return false;
 	}
-	
-	public int comptePoints (Joueur joueur) {
-		return (joueur.getPlis().size()/joueur.getNbplis());
-	}
-7
+
 }

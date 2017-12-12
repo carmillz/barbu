@@ -4,7 +4,10 @@ package barbu;
 public class ContratDame implements Contrat {
 
 	public ContratDame(Jeu jeu) {
-		jeu.partie(jeu.joueurs);
+		jeu.partie(new ContratDame());
+	}
+	public ContratDame() {
+		// TODO Auto-generated constructor stub
 	}
 	public boolean fin(Jeu jeu, int nombre) {
 		if (jeu.nbdames == 4) {

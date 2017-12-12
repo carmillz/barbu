@@ -3,6 +3,11 @@ package barbu;
 public class ContratSalade implements Contrat{
 
 	public ContratSalade(Jeu jeu) {
+		jeu.partie(new ContratSalade());
+	}
+
+
+	public ContratSalade() {
 		// TODO Auto-generated constructor stub
 	}
 

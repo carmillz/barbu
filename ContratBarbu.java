@@ -4,7 +4,12 @@ package barbu;
 public class ContratBarbu implements Contrat {
 
 	public ContratBarbu(Jeu jeu) {
-		jeu.partie(jeu.joueurs);
+		jeu.partie(new ContratBarbu());
+	}
+
+	
+	public ContratBarbu() {
+		
 	}
 
 
