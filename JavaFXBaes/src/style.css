@@ -1,0 +1,116 @@
+#start-ui-pane {
+    -fx-background-image: url("../img/start-ui-bg.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: stretch;
+}
+
+#start-ui-vbox {
+
+}
+
+.start-ui-btn {
+    -fx-background-color: #ffea36;
+    -fx-text-fill: #008819;
+    -fx-background-radius: 50px;
+    -fx-padding: 10px;
+    -fx-pref-width: 200px;
+}
+
+.start-ui-btn:pressed {
+    -fx-background-color: #008819;
+    -fx-text-fill: #ffea36;
+    -fx-background-radius: 50px;
+    -fx-padding: 10px;
+    -fx-pref-width: 200px;
+}
+
+.combo-box .list-cell
+{
+    -fx-background: #008819;
+    -fx-background-color: #008819;
+    -fx-text-fill: #ffea36;
+    -fx-font-size: 20px;
+    -fx-padding: 3 0 2 7;
+    -fx-cell-size: 1.66667em;
+    -fx-pref-height: 40px;
+}
+
+.combo-box-popup .list-view
+{
+    -fx-background-color: #008819, #008819;
+    -fx-background-insets: 0, 1;
+    //-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 8, 0.0 , 0 , 0 );
+}
+
+.combo-box-popup .list-view .list-cell
+{
+    -fx-padding: 4 0 4 5;
+
+    /* No alternate highlighting */
+    -fx-background-color: #008819;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover
+{
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-selection-bar;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover
+{
+    -fx-background-color: #ffea36;
+    -fx-text-fill: #008819;
+}
+
+
+.combo-box-base:hover
+{
+    -fx-color: -fx-hover-base;
+}
+
+.combo-box-base:showing
+{
+    -fx-color: -fx-pressed-base;
+}
+
+.combo-box-base:focused {
+    -fx-background-color: -fx-focus-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-radius: 6.4, 4, 5, 3;
+    -fx-background-insets: -1.4, 0, 1, 2;
+}
+
+.combo-box-base:disabled {
+    -fx-opacity: .4;
+}
+
+#score-box {
+    -fx-background-image: url("../img/bg_wood.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: stretch;
+    -fx-padding: 10px;
+}
+
+
+#score-baord-ui {
+    -fx-background-image: url("../img/score-board-bg.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: stretch;
+    -fx-pref-width: 1000;
+    -fx-padding: 10px;
+}
+
+#score-label {
+    -fx-pref-width: 100px;
+}
+#score-label-details {
+
+}
+
+.currentPlayer {
+    -fx-background-color: chocolate;
+    -fx-padding: 5px;
+}
