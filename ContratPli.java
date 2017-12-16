@@ -12,6 +12,7 @@ public class ContratPli implements Contrat {
 
     }
 
+    @Override
     public void comptePoints(ArrayList<Joueur> joueurs) {
         for (int i = 0; i <= joueurs.size(); i++) {
             joueurs.get(i).getPoints().add(joueurs.get(i).getNbplis() * 10);
@@ -20,10 +21,7 @@ public class ContratPli implements Contrat {
 
     @Override
     public boolean fin(Jeu jeu, int nombre) {
-        if (jeu.nbcartesencours == 0) {
-            return true;
-        }
-        return false;
+        return jeu.nbcartesencours == 0; // Si il y a encore des cartes en jeu, alors on renvoit true pour signifier la fin
     }
 
 }

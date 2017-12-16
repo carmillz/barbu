@@ -31,7 +31,7 @@ public class ContratBarbu implements Contrat {
                     cpt++;
                 }
                 joueur.getPlis().remove(c);
-                joueur.getPoints().add(cpt * 60);
+                joueur.getPoints().add(cpt * 80);
             }
         }
     }

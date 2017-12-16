@@ -36,7 +36,7 @@ public class ContratCoeurs implements Contrat {
                     cpt++;
                 }              
                 joueur.getPlis().remove(c);
-                joueur.getPoints().add(cpt * 20); //a vérifier
+                joueur.getPoints().add(cpt * 10); //a vérifier
             }
         }
 

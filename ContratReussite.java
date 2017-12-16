@@ -1,5 +1,7 @@
 package barbu;
 
+import java.util.ArrayList;
+
 public class ContratReussite implements Contrat {
 
 	public ContratReussite(Jeu jeu) {
@@ -7,9 +9,9 @@ public class ContratReussite implements Contrat {
 	}
 
 	@Override
-	public int comptePoints(Joueur joueur) {
+	public void comptePoints(ArrayList<Joueur> joueurs) {
 		// TODO Auto-generated method stub
-		return 0;
+		
 	}
 
 
