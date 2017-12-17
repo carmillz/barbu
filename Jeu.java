@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Jeu {
 	ArrayList<Joueur> joueurs;
-	ArrayList<Carte> plateau;
+	Collection<Carte> plateau;
 	int nbcartesencours;
 	int nbcartes; // utile pour le contrat pli
 	int nbdames; // utile pour le contrat dame
@@ -21,7 +21,7 @@ public class Jeu {
 		this.nbdames = 0;
 	}
 
-	// MÉTHODES
+	// Mà‰THODES
 
 	/*
 	 * Méthode qui va choisir un joueur (le dernier de notre arraylist de joueurs)
@@ -42,18 +42,18 @@ public class Jeu {
 	 * Méthode qui permet d'ajouter au joueur gangnant le pli en cours
 	 * Une fois les quatre cartes "posées" sur le plateau, on les 
 	 * compare avec les autres via une boucle qui permettra de rendre
-	 * la carte la "plus forte" sachant que cette dernière doit
-	 * possèder le même symboel que la première carte jouée.
-	 * Une fois que cette carte est trouvée, on l'ajoute à l'attribut 
+	 * la carte la "plus forte" sachant que cette dernià¨re doit
+	 * possà¨der le màªme symboel que la premià¨re carte jouée.
+	 * Une fois que cette carte est trouvée, on l'ajoute à  l'attribut 
 	 * qui conserve les plis du joueur gagnant
 	 */
 	public void gagnant() { 
-		String symbole = plateau.get(0).getSymbole();
-		int valeur = plateau.get(0).getValeur();
+		String symbole = ((ArrayList<Carte>) plateau).get(0).getSymbole();
+		int valeur = ((ArrayList<Carte>) plateau).get(0).getValeur();
 		int max = 0;
 		for (int i = 1; i < joueurs.size(); i++) { 
-			if (plateau.get(i).getSymbole().equals(symbole) && plateau.get(i).getValeur() > valeur) {
-				valeur = plateau.get(i).getValeur();
+			if (((ArrayList<Carte>) plateau).get(i).getSymbole().equals(symbole) && ((ArrayList<Carte>) plateau).get(i).getValeur() > valeur) {
+				valeur = ((ArrayList<Carte>) plateau).get(i).getValeur();
 				max = i; 
 			}
 		}
@@ -90,15 +90,15 @@ public class Jeu {
 	public int tour(){
 		for (int j=0; j<joueurs.size(); j++){
 			System.out.println("C'est au tour de " + joueurs.get(j).getNom() + " de jouer ");
-			System.out.println(" Les cartes déjà jouées sont : ");
+			System.out.println(" Les cartes déjà  jouées sont : ");
 			for (int k=0; k<this.plateau.size(); k++){
-				System.out.println(plateau.get(k) + " jouée par " + joueurs.get(k).getNom());
+				System.out.println(((ArrayList<Carte>) plateau).get(k) + " jouée par " + joueurs.get(k).getNom());
 			}
-			joueurs.get(j).choisirCarte(this);
+			joueurs.get(j).choisirCarte(this,plateau);
 		}
 		System.out.println(" Les cartes jouées lors de ce tour sont : ");
 		for (int k=0; k<this.plateau.size(); k++){
-			System.out.println(plateau.get(k) + " jouée par " + joueurs.get(k).getNom());
+			System.out.println(((ArrayList<Carte>) plateau).get(k) + " jouée par " + joueurs.get(k).getNom());
 		}
 		return plateau.size();
 	}
@@ -124,7 +124,7 @@ public class Jeu {
 		//sc.close();
 	}
 
-	// Méthode qui demande à l'utilisateur le contrat qu'il veut
+	// Méthode qui demande à  l'utilisateur le contrat qu'il veut
 	public Contrat choixContrat() {
 		boolean quitter = false;
 		int tmp;
@@ -171,10 +171,12 @@ public class Jeu {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Voulez-vous jouer avec 32 ou 52 cartes ?"); // demande le nombre de cartes
 		int nbcartes = sc.nextInt();
-		Paquet paquet = new Paquet(nbcartes);
-		Jeu jeu = new Jeu(nbcartes); // initialise le jeu
+		
+		Jeu jeu = new Jeu(nbcartes);
 		jeu.creationJoueurs(); // initialise les joueurs
-		paquet.cartesAJouer(jeu.joueurs.size()); // adapte le nombre de cartes en fonction du nombre de joueus
+		Paquet paquet = new Paquet(nbcartes, jeu.joueurs.size());
+		System.out.println(paquet.toString()+ "\n" + paquet.paquet.size());
+
 		paquet.distribuer(jeu.joueurs); // distribue les cartes entre les joueurs
 		jeu.rotation();
 		System.out.println(jeu.nbcartes);
