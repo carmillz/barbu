@@ -71,7 +71,7 @@ public class Paquet {
 	}
 
 	/*
-	 * MÃ©thode qui permet de donner le nombre de cartes mises en jeu en fonction du
+	 * Méthode qui permet de donner le nombre de cartes mises en jeu en fonction du
 	 * nombre de joueurs afins que ces derniers aient un nombre de cartes Ã©gaux Au
 	 * niveau de l'exection...
 	 */
