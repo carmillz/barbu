@@ -1,16 +1,13 @@
 package barbu;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Scanner;
 
-public class Joueur implements Comparable<Carte> {
+public class Joueur {
 	private String nom;
 	private String cle;
-	private int nbplis;
 	private ArrayList<Carte> main;
 	private ArrayList<Integer> points;
 	private HashSet<Carte> plis;
@@ -42,13 +39,6 @@ public class Joueur implements Comparable<Carte> {
 		this.cle = cle;
 	}
 
-	public int getNbplis() {
-		return nbplis;
-	}
-
-	public void setNbplis(int nbplis) {
-		this.nbplis = nbplis;
-	}
 
 	public ArrayList<Carte> getMain() {
 		return main;
@@ -80,7 +70,65 @@ public class Joueur implements Comparable<Carte> {
 		return nom;
 	}
 
-	public void choisirCarte(Jeu jeu) {
+	public void choisirCarte(Jeu jeu, Collection<Carte> plateau) {
+		boolean possible = false;
+		System.out.println("Vos cartes sont :");
+		if (plateau.isEmpty()) {
+			possible = true;
+		}
+		for (int i = 1; i <= main.size(); i++) {
+			System.out.println(i + " : " + main.get(i - 1).toString());
+			if (!plateau.isEmpty()
+					&& ( ((ArrayList<Carte>) plateau).get(0).getSymbole().equals(main.get(i - 1).getSymbole()))) {
+				possible = true;
+			}
+		}
+		boolean pasJoue = true;
+		while (pasJoue) {
+			if (possible) {
+				System.out.println("Choisissez votre carte ! Entrez  le numéro de la carte.");
+				Scanner scan = new Scanner(System.in);
+				int numero = scan.nextInt();
+				if (numero - 1 >= main.size()) {
+					System.out.println("Cette carte n'existe pas... Réessayez !");
+				} else if (jeu.plateau.size() == 0 || ((ArrayList<Carte>) plateau).get(0).getSymbole()
+						.equals(main.get(numero - 1).getSymbole())) {
+					jeu.plateau.add(main.get(numero - 1));
+					pasJoue = false;
+					main.remove(numero - 1);
+				} else {
+					System.out.println(" Vous ne pouvez pas jouer cette carte !");
+				}
+			} else {
+				System.out.println("Vous ne pouvez pas jouer la couleur demandée, jouez n'importe quelle carte !");
+				Scanner scan = new Scanner(System.in);
+				int numero = scan.nextInt();
+				if (numero - 1 >= main.size()) {
+					System.out.println("Cette carte n'existe pas... Réessayez !");
+				} else {
+					jeu.plateau.add(main.get(numero - 1));
+					main.remove(numero - 1);
+					pasJoue = false;
+				}
+			}
+		}
+		
+	}
+	
+	
+	public static boolean isVide (Carte [][] plateau) {
+		for (int i=0; i<=plateau.length;i++) {
+			for (int j=0;j<=plateau[i].length;j++) {
+				if (!plateau[i][j].equals(null)){
+					return false;
+				}
+			}
+			
+		}
+		return true;
+	}
+	
+	public void choisirCarte(Jeu jeu, Carte [][] plateau) {
 		boolean possible=false;
 		System.out.println("Vos cartes sont :");
 		if (jeu.plateau.isEmpty()){
@@ -88,10 +136,11 @@ public class Joueur implements Comparable<Carte> {
 		}
 		for (int i = 1; i <= main.size(); i++) {
 			System.out.println(i + " : " + main.get(i - 1).toString());
-			if (!jeu.plateau.isEmpty() && jeu.plateau.get(0).getSymbole().equals(main.get(i-1).getSymbole())){
+			if (!isVide(plateau)){
 				possible=true;
 			}
 		}
+		
 		boolean pasJoue=true;
 		while (pasJoue){
 			if (possible){
@@ -100,7 +149,7 @@ public class Joueur implements Comparable<Carte> {
 				int numero = scan.nextInt();
 				if (numero-1>=main.size()){
 					System.out.println("Cette carte n'existe pas... Réessayez !");
-				}else if (jeu.plateau.size()==0 || jeu.plateau.get(0).getSymbole().equals(main.get(numero-1).getSymbole())){
+				}else if (jeu.plateau.size()==0 || ((ArrayList<Carte>) jeu.plateau).get(0).getSymbole().equals(main.get(numero-1).getSymbole())){
 					jeu.plateau.add(main.get(numero-1));
 					pasJoue=false;
 					main.remove(numero-1);
@@ -144,20 +193,14 @@ public class Joueur implements Comparable<Carte> {
 				break;
 			}
 		}
-		
-		//DEMANDER A CASSANDRE POUR TRIER LES CARTES
-		//carreau.sort();
+
+		// DEMANDER A CASSANDRE POUR TRIER LES CARTES
+		// carreau.sort();
 
 	}
 
 	public int compareTo(int c) {
 		return (this.main.get(0).compareTo(c));
 	}
-	//FIN MÉTHODES
-
-	@Override
-	public int compareTo(Carte arg0) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	// FIN MÉTHODES
 }
