@@ -3,9 +3,9 @@ package barbu;
 public class Carte {
     /*
      * La classe carte contient les informations relatives aux cartes
-     * soit un nom (de 2 à as) et un symbole (coeur, pique, trèfle et carreau).
-     * On y a également ajouté la valeur qui est croissante de 2 à 14 afin de
-     * faire les comparaisons entre les cartes plus facilement à la fin d'un pli
+     * soit un nom (de 2 Ã  as) et un symbole (coeur, pique, trÃ¨fle et carreau).
+     * On y a Ã©galement ajoutÃ© la valeur qui est croissante de 2 Ã  14 afin de
+     * faire les comparaisons entre les cartes plus facilement Ã  la fin d'un pli
      */
     private String symbole;
     private int valeur;
@@ -38,7 +38,7 @@ public class Carte {
     public Carte(String symbole, int valeur) {
    	 /*
    	  * Pour construire une carte, on a besoin du nom et du symbole, la valeur
-   	  * est calculée à partir du nom via une méthode annexe
+   	  * est calculÃ©e Ã  partir du nom via une mÃ©thode annexe
    	  */
    	 super();
    	 this.symbole = symbole;
@@ -48,9 +48,9 @@ public class Carte {
     
     
     /*
-     * La méthode valeurToNom permet, à partir de la valeur qui est passée en paramètre
-     * de donner un nom à la carte pour simplifier la compréhension, notamment du
-     * valet à l'as.
+     * La mÃ©thode valeurToNom permet, Ã  partir de la valeur qui est passÃ©e en paramÃ¨tre
+     * de donner un nom Ã  la carte pour simplifier la comprÃ©hension, notamment du
+     * valet Ã  l'as.
     */
     public String valeurToNom(int valeur){
    	 String nom="";
