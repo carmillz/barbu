@@ -32,19 +32,9 @@ public class Paquet {
 		for (int j = 0; j < symbole.length; j++) {
 			for (int i = (14 * 4 - nbCartes) / 4 + 1; i <= 14; i++) {
 				Carte carte = new Carte(symbole[j], i);
-				if (nbJoueurs == 5) {
-					if (nbCartes == 32) {
-						if (!(carte.getValeur() == 7
-								&& (carte.getSymbole().equals("Pique") || carte.getSymbole().equals("Trèfle")))) {
-							paquet.add(carte);
-						}
-					} else {
-						if (!(carte.getValeur() == 2
-								&& (carte.getSymbole().equals("Pique") || carte.getSymbole().equals("Trèfle")))) {
-							paquet.add(carte);
-						}
-					}
-				} else if (nbJoueurs == 3) {
+				if (nbJoueurs==4) {
+					paquet.add(carte);
+				}else if (nbJoueurs == 3) {
 					if (nbCartes == 32) {
 						if (!(carte.getValeur() == 7
 								&& (carte.getSymbole().equals("Pique") || carte.getSymbole().equals("Trèfle")))) {
