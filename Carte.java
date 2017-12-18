@@ -70,8 +70,5 @@ public class Carte {
         }
         return nom;
     }
-    public int compareTo(int valeur) {
-        return (this.compareTo(valeur));
-    }
 }
 
