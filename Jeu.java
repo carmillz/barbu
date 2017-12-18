@@ -47,6 +47,22 @@ public class Jeu {
 	 * fois que cette carte est trouvée, on l'ajoute à  l'attribut qui conserve les
 	 * plis du joueur gagnant
 	 */
+	
+	
+	public boolean isVide(int nbCartes) {
+		plateau = (String[][]) plateau;
+		boolean bool=true;
+		int i=0, j=0;
+		while (bool && i< (plateau).length) {
+			while (j; j< plateau[i].size()) {
+				if (!plateau[i][j].isEmpty()) {
+					
+				}
+			}
+		}
+		return false;
+		
+	}
 	public void gagnant() {
 		String symbole = ((ArrayList<Carte>) plateau).get(0).getSymbole();
 		int valeur = ((ArrayList<Carte>) plateau).get(0).getValeur();
