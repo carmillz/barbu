@@ -1,8 +1,7 @@
-
+package barbu;
 
 import java.util.*;
 
-//important
 public class Paquet {
     /*
      * l'objet Paquet contient deux attributs : un qui contient le nombre de cartes
