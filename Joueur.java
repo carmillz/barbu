@@ -115,19 +115,6 @@ public class Joueur {
 		
 	}
 	
-	
-	public static boolean isVide (Carte [][] plateau) {
-		for (int i=0; i<=plateau.length;i++) {
-			for (int j=0;j<=plateau[i].length;j++) {
-				if (!plateau[i][j].equals(null)){
-					return false;
-				}
-			}
-			
-		}
-		return true;
-	}
-	
 	public void choisirCarte(Jeu jeu, Carte [][] plateau) {
 		boolean possible=false;
 		System.out.println("Vos cartes sont :");
