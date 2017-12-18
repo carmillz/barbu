@@ -4,25 +4,23 @@ import java.util.ArrayList;
 
 public class ContratPli implements Contrat {
 
-    public ContratPli(Jeu jeu) {
-        new ContratPli();
-    }
+	public ContratPli(Jeu jeu) {
+		new ContratPli();
+	}
 
-    public ContratPli() {
+	public ContratPli() {
+	}
 
-    }
+	@Override
+	public void comptePoints(ArrayList<Joueur> joueurs) {
+		for (int i = 0; i < joueurs.size(); i++) {
+			joueurs.get(i).getPoints().add((joueurs.get(i).getPlis().size() / joueurs.size()) * 10);
+		}
+	}
 
-    @Override
-    public void comptePoints(ArrayList<Joueur> joueurs) {
-        for (int i = 0; i < joueurs.size(); i++) {
-            joueurs.get(i).getPoints().add((joueurs.get(i).getPlis().size()/joueurs.size())* 10);
-        }
-    }
-
-    @Override
-    //MÃ©thode non utilisÃ©e
-    public boolean fin(int nombre) {
-        return false;
-    }
-
+	@Override
+	// Méthode non utilisée
+	public boolean fin(int nombre) {
+		return false;
+	}
 }
