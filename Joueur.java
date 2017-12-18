@@ -1,7 +1,11 @@
+package barbu;
+
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Scanner;
+
 
 public class Joueur {
     private String nom;
@@ -77,7 +81,7 @@ public class Joueur {
         for (int i = 1; i <= main.size(); i++) {
             System.out.println(i + " : " + main.get(i - 1).toString());
             if (!plateau.isEmpty()
-                    && (((ArrayList<Carte>) plateau).get(0).getSymbole().equals(main.get(i - 1).getSymbole())))
+                    && ( ((ArrayList<Carte>) plateau).get(0).getSymbole().equals(main.get(i - 1).getSymbole())))
                 possible = true;
         }
         boolean pasJoue = true;
@@ -90,7 +94,7 @@ public class Joueur {
                     System.out.println("Cette carte n'existe pas... Réessayez !");
                 } else if (jeu.plateau.size() == 0 || ((ArrayList<Carte>) plateau).get(0).getSymbole()
                         .equals(main.get(numero - 1).getSymbole())) {
-                    ((ArrayList<Carte>) jeu.plateau).add(main.get(numero - 1));
+                    ((ArrayList<Carte>)jeu.plateau).add(main.get(numero - 1));
                     pasJoue = false;
                     main.remove(numero - 1);
                 } else {
@@ -103,7 +107,7 @@ public class Joueur {
                 if (numero - 1 >= main.size()) {
                     System.out.println("Cette carte n'existe pas... Réessayez !");
                 } else {
-                    ((ArrayList<Carte>) jeu.plateau).add(main.get(numero - 1));
+                    ((ArrayList<Carte>)jeu.plateau).add(main.get(numero - 1));
                     main.remove(numero - 1);
                     pasJoue = false;
                 }
@@ -113,140 +117,136 @@ public class Joueur {
     }
 
 
-    public void choisirCarte(Jeu jeu) {
-        boolean possible = false;
+    public void choisirCarte(Jeu jeu, HashSet plateau) {
+        boolean possible=false;
         System.out.println("Vos cartes sont :");
-        if (jeu.plateau.isEmpty()) {
-            possible = true;
+        if (jeu.plateau.isEmpty()){
+            possible=true;
         }
         for (int i = 1; i <= main.size(); i++) {
             System.out.println(i + " : " + main.get(i - 1).toString());
-            if (jeu.plateau.isEmpty()) {
-                possible = true;
+            if (plateau.isEmpty()){
+                possible=true;
             }
         }
 
-        boolean pasJoue = true;
-        while (pasJoue) {
-            if (possible) {
+        boolean pasJoue=true;
+        while (pasJoue){
+            if (possible){
                 System.out.println("Choisissez votre carte ! Entrez  le numéro de la carte.");
                 Scanner scan = new Scanner(System.in);
                 int numero = scan.nextInt();
-                if (numero - 1 >= main.size()) {
+                if (numero-1>=main.size()){
                     System.out.println("Cette carte n'existe pas... Réessayez !");
-                } else if (jeu.plateau.size() == 0 || ((ArrayList<Carte>) jeu.plateau).get(0).getSymbole().equals(main.get(numero - 1).getSymbole())) {
-                    ((ArrayList<Carte>) jeu.plateau).add(main.get(numero - 1));
-                    pasJoue = false;
-                    main.remove(numero - 1);
-                } else {
-                    System.out.println("Choisissez votre carte ! Entrez  le numéro de la carte.");
+                }else if (jeu.plateau.size()==0 || ((ArrayList<Carte>) jeu.plateau).get(0).getSymbole().equals(main.get(numero-1).getSymbole())){
+                    ((ArrayList<Carte>)jeu.plateau).add(main.get(numero-1));
+                    pasJoue=false;
+                    main.remove(numero-1);
+                }else {System.out.println("Choisissez votre carte ! Entrez  le numéro de la carte.");
                     scan = new Scanner(System.in);
                     numero = scan.nextInt();
-                    if (numero - 1 >= main.size()) {
+                    if (numero-1>=main.size()){
                         System.out.println("Cette carte n'existe pas... Réessayez !");
                     }
                     System.out.println(" Vous ne pouvez pas jouer cette carte !");
                 }
-            } else {
+            }else {
                 System.out.println("Vous ne pouvez pas jouer la couleur demandée, jouez n'importe quelle carte !");
                 Scanner scan = new Scanner(System.in);
                 int numero = scan.nextInt();
-                if (numero - 1 >= main.size()) {
+                if (numero-1>=main.size()){
                     System.out.println("Cette carte n'existe pas... Réessayez !");
-                } else {
-                    ((ArrayList<Carte>) jeu.plateau).add(main.get(numero - 1));
-                    main.remove(numero - 1);
-                    pasJoue = false;
+                }else {
+                    ((ArrayList<Carte>)jeu.plateau).add(main.get(numero-1));
+                    main.remove(numero-1);
+                    pasJoue=false;
                 }
             }
         }
 
     }
 
-    public Carte choisirCarteReussite(Jeu jeu, int debut) {
-        System.out.println("Vos cartes sont :");
-        for (int i = 1; i <= main.size(); i++) {
-            System.out.println(i + " : " + main.get(i - 1).toString());
-        }
-
+    public Carte choisirCarteReussite(Jeu jeu){
         int i = 0;
-        boolean pasJoue = true;
-        boolean possible = false;
+        boolean pasJoue=true;
+        boolean possible=true;
         Carte carte = null;
         Carte sup = null;
         Carte inf = null;
-        while (i < main.size() && !possible) {
-            if (!(main.get(i).getValeur() == 14)) {
-                sup = new Carte(main.get(i).getSymbole(), main.get(i).getValeur() + 1);
+        while (i<main.size() && possible){
+            if (!(main.get(i).getValeur()==14)){
+                sup = new Carte(main.get(i).getSymbole(), main.get(i).getValeur()+1) ;
             }
-            if (!((main.get(i).getValeur() == 2))) {
-                inf = new Carte(main.get(i).getSymbole(), main.get(i).getValeur() - 1);
+            if (!((main.get(i).getValeur()==2))){
+                inf = new Carte(main.get(i).getSymbole(), main.get(i).getValeur()-1) ;
             }
-            //on regarde si la carte supérieure ou si la carte inférieure est dans le plateau
-
-
-            if (inf != null) {
-                if (((ArrayList<ArrayList<String>>) jeu.plateau).get(jeu.positionSymbole(inf.getSymbole())).get(inf.getValeur() - 2).equals(inf.toString())) {
-                    possible = true;
-                }
-            }
-            if (sup != null) {
-                if (((ArrayList<ArrayList<String>>) jeu.plateau).get(jeu.positionSymbole(sup.getSymbole())).get(sup.getValeur() - 2).equals(sup.toString())) {
-                    possible = true;
-                }
+            if ((sup==null && inf==null) || ((!jeu.plateau.contains(sup.toString())) && (!jeu.plateau.contains(inf.toString())))){
+                possible=false;
             }
 
-            if (main.get(i).getValeur() == debut) {
-                possible = true;
-            }
-
-
-            i++;
         }
-
-        if (!possible) {
+        if (!possible){
             System.out.println("Désolé, vous le pouvez pas jouer ! Passer votre tour");
         }
-        while (possible && pasJoue) {
+        while (possible && pasJoue){
             System.out.println("Choisissez votre carte ! Entrez  le numéro de la carte.");
             Scanner scan = new Scanner(System.in);
             int numero = scan.nextInt();
-            if (numero - 1 > main.size()) {
+            if (numero-1>=main.size()){
                 System.out.println("Cette carte n'existe pas... Réessayez !");
-            } else {
-                carte = main.get(numero - 1);
-                if (carte.getValeur() == debut) {
+            }else {
+                carte = main.get(numero);
+                if (!(main.get(i).getValeur()==14)){
+                    sup = new Carte(carte.getSymbole(), carte.getValeur()+1) ;
+                }
+                if (!((main.get(i).getValeur()==2))){
+                    inf = new Carte(carte.getSymbole(), carte.getValeur()-1) ;
+                }
+                if (jeu.plateau.contains(sup)){
                     main.remove(carte);
-                    pasJoue = false;
-                    jeu.ajoutReussite(carte);
-                } else {
-                    if (!(carte.getValeur() == 14)) {
-                        sup = new Carte(carte.getSymbole(), carte.getValeur() + 1);
-                    }
-                    if (!((carte.getValeur() == 2))) {
-                        inf = new Carte(carte.getSymbole(), carte.getValeur() - 1);
-                    }
-                    if (sup != null) {
-                        if (((ArrayList<ArrayList<String>>) jeu.plateau).get(jeu.positionSymbole(sup.getSymbole())).get(sup.getValeur() - 2).equals(sup.toString())) {
-                            main.remove(carte);
-                            pasJoue = false;
-                            jeu.ajoutReussite(carte);
-
-                        }
-                    }
-                        if (inf != null) {
-                            if (((ArrayList<ArrayList<String>>) jeu.plateau).get(jeu.positionSymbole(inf.getSymbole())).get(inf.getValeur() - 2).equals(inf.toString())) {
-                                main.remove(carte);
-                                pasJoue = false;
-                                jeu.ajoutReussite(carte);
-                            }
-                        }
-                        if (pasJoue) {
-                            System.out.println("Vous ne pouvez pas jouer cette carte ! Essayez-en une autre !");
-                        }
-                    }
+                    pasJoue=false;
+                    //jeu.ajoutReussite(carte);
+                }else if (jeu.plateau.contains(inf)){
+                    main.remove(carte);
+                    pasJoue=false;
+                    //jeu.ajoutReussite(carte);
+                }else {
+                    System.out.println("Vous ne pouvez pas jouer cette carte ! Essayez-en une autre !");
                 }
             }
+        }
         return null;
     }
+
+    public void trierMain() {
+        ArrayList<Carte> carreau = new ArrayList<Carte>();
+        ArrayList<Carte> pique = new ArrayList<Carte>();
+        ArrayList<Carte> trefle = new ArrayList<Carte>();
+        ArrayList<Carte> coeur = new ArrayList<Carte>();
+        for (int i = 0; i < main.size(); i++) {
+            switch (main.get(i).getSymbole()) {
+                case "Carreau":
+                    carreau.add(main.get(i));
+                    break;
+                case "Pique":
+                    pique.add(main.get(i));
+                    break;
+                case "Trèfle":
+                    trefle.add(main.get(i));
+                    break;
+                case "coeur":
+                    coeur.add(main.get(i));
+                    break;
+            }
+        }
+
+        // DEMANDER A CASSANDRE POUR TRIER LES CARTES
+        // carreau.sort();
+
+    }
+
+    //public int compareTo(int c) {
+        //return (this.main.get(0).compareTo(c));
+    //}
+    // FIN MÉTHODES
 }

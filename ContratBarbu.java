@@ -1,8 +1,10 @@
-
+package barbu;
 
 import java.util.ArrayList;
 
 public class ContratBarbu implements Contrat {
+
+
 
     public ContratBarbu(Jeu jeu) {
         new ContratBarbu();

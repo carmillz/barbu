@@ -1,14 +1,13 @@
-
+package barbu;
 
 import java.util.ArrayList;
 
 public class ContratSalade implements Contrat {
 
-    public ContratSalade() {
+    public ContratSalade(Jeu jeu) {
         // TODO Auto-generated constructor stub
     }
 
-    @Override
     public void comptePoints(ArrayList<Joueur> joueurs) {
         Carte c;
         for (int i = 0; i < joueurs.size(); i++) {
@@ -29,14 +28,14 @@ public class ContratSalade implements Contrat {
                 if (c.getValeur() == 13 && c.getSymbole().equals("Coeur")){ // On donne les points du roi si il y est
                     cptroi++;
                 }
-                joueur.getPlis().remove(c); // On enlève une carte
+                joueur.getPlis().remove(c); // On enlÃ¨ve une carte
             }
-            joueur.getPoints().add(plis + cptcoeur*10 + cptdame*20 + cptroi*80); //Vérifier les points dans tous les contrats et celui-ci !!
+            joueur.getPoints().add(plis + cptcoeur*10 + cptdame*20 + cptroi*80); //VÃ©rifier les points dans tous les contrats et celui-ci !!
         }
 
     }
 
-    //Méthode non utilisée
+    //MÃ©thode non utilisÃ©e
     @Override
     public boolean fin(int nombre) {
         return false;

@@ -1,56 +1,42 @@
+package barbu;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ContratReussite implements Contrat {
-    int debut;
-    public final String vide="               ";
-    public ContratReussite() {
-        this.debut=7;
-    }
+	int debut;
+	public final String vide = "               ";
 
-    public int choixDebut(){
-        System.out.println("Entrez la carte par laquelle vous voulez commencer !");
-        Scanner sc = new Scanner(System.in);
-        int debut = sc.nextInt();
-        while (debut > 14 && debut < 2){
-            System.out.println("Ce choix n'est pas valide, recommencez !");
-            debut = sc.nextInt();
-        }
-        this.debut = debut;
-        return debut;
-    }
+	public ContratReussite() {
+		this.debut = 7;
+	}
 
-    @Override
-    public void comptePoints(ArrayList<Joueur> joueurs) {
-        int i =0;
-        boolean premier=false;
-        boolean second=false;
-        while (i<joueurs.size()&&!premier){
-            if (joueurs.get(i).getMain().isEmpty()) {
-                joueurs.get(i).getPoints().add(-300);
-                premier =true;
-            }
-            i++;
-        }
-        while (i<joueurs.size()){
-            if (joueurs.get(i).getMain().isEmpty()) {
-                joueurs.get(i).getPoints().add(-100);
-                second=true;
-            }
-            i++;
-        }
-        //il faudrait un second gagnant
-    }
+	public int choixDebut() {
+		System.out.println("Entrez la carte par laquelle vous voulez commencer !");
+		Scanner sc = new Scanner(System.in);
+		int debut = sc.nextInt();
+		while (debut > 14 && debut < 2) {
+			System.out.println("Ce choix n'est pas valide, recommencez !");
+			debut = sc.nextInt();
+		}
+		this.debut = debut;
+		return debut;
+	}
 
+	@Override
+	public void comptePoints(ArrayList<Joueur> joueurs) {
+		for (int i = 0; i < joueurs.size(); i++) {
+			if (joueurs.get(i).getMain().isEmpty()) {
+				joueurs.get(i).getPoints().add(-100);
+			}
+		}
 
+	}
 
-
-
-
-    @Override
-    public boolean fin(int nombre) {
-        //méthode non utilisée
-        return false;
-    }
+	@Override
+	public boolean fin(int nombre) {
+		// méthode non utilisée
+		return false;
+	}
 
 }
