@@ -52,7 +52,7 @@ public class Paquet {
     }
 
     /*
-     * la mÃ©thode distribuer(ArrayList<Joueur> joueurs) permet, suivant le nombre
+     * la méthode distribuer(ArrayList<Joueur> joueurs) permet, suivant le nombre
      * de joueurs sachant que le joueur qui "distribue" est le dernier de la liste.
      * Au niveau de l'exÃ©cution de la mÃ©thode, on vide au fur et Ã  mesure le
      * paquet de cartes en ajoutant une carte choisie au hasard avec un itÃ©rateur
@@ -61,13 +61,17 @@ public class Paquet {
      */
     public void distribuer(ArrayList<Joueur> joueurs) {
         Carte c;
+        ArrayList<Joueur> temp = joueurs;
         while (paquet.size() != 0) {
-            for (int i = 0; i < joueurs.size(); i++) {
+            for (int i = 0; i < temp.size(); i++) {
                 c = paquet.iterator().next();
                 paquet.remove(c);
-                joueurs.get(i).getMain().add(c);
+                temp.get(i).getMain().add(c);
             }
         }
+		for (int h=0;h<temp.size();h++) {
+			joueurs.get(h).trierMain();
+		}
     }
 
     /*
