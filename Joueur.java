@@ -247,4 +247,3 @@ public class Joueur {
         return (this.main.get(0).compareTo(c));
     }
     // FIN MÉTHODES
-}
