@@ -1,7 +1,11 @@
+package barbu;
+
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Scanner;
+
 
 public class Joueur {
     private String nom;
@@ -113,8 +117,6 @@ public class Joueur {
     }
 
 
-
-
     public void choisirCarte(Jeu jeu, HashSet plateau) {
         boolean possible=false;
         System.out.println("Vos cartes sont :");
@@ -203,11 +205,11 @@ public class Joueur {
                 if (jeu.plateau.contains(sup)){
                     main.remove(carte);
                     pasJoue=false;
-                    jeu.ajoutReussite(carte);
+                    //jeu.ajoutReussite(carte);
                 }else if (jeu.plateau.contains(inf)){
                     main.remove(carte);
                     pasJoue=false;
-                    jeu.ajoutReussite(carte);
+                    //jeu.ajoutReussite(carte);
                 }else {
                     System.out.println("Vous ne pouvez pas jouer cette carte ! Essayez-en une autre !");
                 }
@@ -243,7 +245,8 @@ public class Joueur {
 
     }
 
-    public int compareTo(int c) {
-        return (this.main.get(0).compareTo(c));
-    }
+    //public int compareTo(int c) {
+        //return (this.main.get(0).compareTo(c));
+    //}
     // FIN MÉTHODES
+}

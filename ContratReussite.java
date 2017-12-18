@@ -1,47 +1,42 @@
-package barbu;
-
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ContratReussite implements Contrat {
+    public static String vide="               ";
+    public ContratReussite() {
+        // TODO Auto-generated constructor stub
+    }
 
-	public ContratReussite(Jeu jeu) {
-		// TODO Auto-generated constructor stub
-	}
+    @Override
+    public void comptePoints(ArrayList<Joueur> joueurs) {
+        for (int i=0; i<joueurs.size(); i++){
+            if (joueurs.get(i).getMain().isEmpty()) {
+                joueurs.get(i).getPoints().add(-100);
+            }
+        }
 
-	@Override
-	public void comptePoints(ArrayList<Joueur> joueurs) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public boolean fin(int nombre) {
-		if (nombre>=3) {
-			return true;
-		}
-		return false;
-	}
-
-	public String [][] creation (){
-		return null;
-		
-	}
+    }
 
 
+   public boolean vide(Jeu jeu){
+        boolean vide = true;
+        // on parcourt les lignes
+        for (int i = 0; i<jeu.joueurs.size(); i++){
+            // on parcourt les colonnes
+            for (int j=0; j<jeu.nbCartes/jeu.joueurs.size(); j++){
+                if (!((ArrayList<ArrayList<String>>) jeu.plateau).get(i).get(j).equals(vide)){
+                    return false;
+                }
+            }
+        }
+        return vide;
+    }
 
-	
-	public void partieReussite(Jeu jeu) {
-		int cpt=0;
-		while (!this.fin()) {
-			for (int i=0; i>=jeu.joueurs.size();i++) {
-				jeu.joueurs.get(i).choisirCarte(jeu);
-				if (jeu.joueurs.get(i).getMain().isEmpty()) {
-					cpt=cpt+1;
-				}
-				
-			}
-		}
-	}
+
+
+    @Override
+    public boolean fin(int nombre) {
+        //méthode non utilisée
+        return false;
+    }
+
 }
