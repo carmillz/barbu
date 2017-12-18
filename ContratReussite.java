@@ -1,28 +1,44 @@
-package barbu;
-
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ContratReussite implements Contrat {
-	public static String vide="               ";
-	public ContratReussite() {
-		// TODO Auto-generated constructor stub
-	}
+    int debut;
+    public final String vide="               ";
+    public ContratReussite() {
+        this.debut=7;
+    }
 
-	@Override
-	public void comptePoints(ArrayList<Joueur> joueurs) {
-		// TODO Auto-generated method stub
-		
-	}
+    public int choixDebut(){
+        System.out.println("Entrez la carte par laquelle vous voulez commencer !");
+        Scanner sc = new Scanner(System.in);
+        int debut = sc.nextInt();
+        while (debut > 14 && debut < 2){
+            System.out.println("Ce choix n'est pas valide, recommencez !");
+            debut = sc.nextInt();
+        }
+        this.debut = debut;
+        return debut;
+    }
+
+    @Override
+    public void comptePoints(ArrayList<Joueur> joueurs) {
+        for (int i=0; i<joueurs.size(); i++){
+            if (joueurs.get(i).getMain().isEmpty()) {
+                joueurs.get(i).getPoints().add(-100);
+            }
+        }
+
+    }
 
 
-	public boolean vide(Collection<String> plateau, int nbCartes){
-		for
-	}
 
-	@Override
-	public boolean fin(Jeu jeu, int nombre) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
+
+
+    @Override
+    public boolean fin(int nombre) {
+        //méthode non utilisée
+        return false;
+    }
 
 }
