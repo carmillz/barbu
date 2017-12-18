@@ -1,10 +1,10 @@
-
+package barbu;
 
 import java.util.ArrayList;
 
 public class ContratSalade implements Contrat {
 
-    public ContratSalade() {
+    public ContratSalade(Jeu jeu) {
         // TODO Auto-generated constructor stub
     }
 
@@ -16,10 +16,10 @@ public class ContratSalade implements Contrat {
             int cptdame = 0;
             int cptroi = 0;
             int plis = joueurs.get(i).getPlis().size()/joueurs.size()* 10;
-            System.out.println(joueurs.get(i).getPlis().toString());
+			System.out.println(joueurs.get(i).getPlis().toString());
             Joueur joueur = joueurs.get(i); // On fait joueur par joueur, et on simplifie pour l'utilisation du joueur i plus tard
             while (!joueur.getPlis().isEmpty()) { // Tant que le joueur a des plis
-                c = joueur.getPlis().iterator().next(); // On regarde carte par carte
+                c = joueur.getPlis().iterator().next(); // On regarde carte par carte 
                 if (c.getSymbole().equals("Coeur")) { // On compte le nombre de coeurs
                     cptcoeur++;
                 }
@@ -29,17 +29,17 @@ public class ContratSalade implements Contrat {
                 if (c.getValeur() == 13 && c.getSymbole().equals("Coeur")){ // On donne les points du roi si il y est
                     cptroi++;
                 }
-                joueur.getPlis().remove(c); // On enlève une carte
+                joueur.getPlis().remove(c); // On enlève une carte 
             }
             joueur.getPoints().add(plis + cptcoeur*10 + cptdame*20 + cptroi*80); //Vérifier les points dans tous les contrats et celui-ci !!
         }
-
+        
     }
 
     //Méthode non utilisée
     @Override
     public boolean fin(int nombre) {
-        return false;
+        return false;            
     }
-
+    
 }
