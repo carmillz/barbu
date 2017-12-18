@@ -1,4 +1,4 @@
-package barbu;
+
 
 import java.util.ArrayList;
 
@@ -30,7 +30,7 @@ public class ContratBarbu implements Contrat {
                 }
                 joueurs.get(i).getPlis().remove(c);
                 System.out.println(cpt);
-                
+
             }
             joueurs.get(i).getPoints().add(cpt * 80);
         }
